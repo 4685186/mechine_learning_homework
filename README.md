@@ -70,7 +70,8 @@ learn_rate_value = 0.002
 从测试集的分类准确率来看，模型的准确率相比预实验有了显著的提升，这是由于提高隐藏层的数量，增强了模型的特征提取能力，同时输入图片分辨率变化为224×224，避免了预实验中的分辨率损失。
 
 4. 进一步实验
-    1. 加入BN层
+
+*加入BN层*
 
 基于pytorch框架，自行实现了BN层，其中γ矩阵与β矩阵利用pytorch的自动微分机制进行更新。
 
@@ -113,7 +114,7 @@ self.beta = nn.Parameter(torch.zeros(shape), requires_grad=True)
     * 加入BN层并适当地增加batchsize，能够提高模型的分类准确率
 
 
-   2. 加入dropout层
+*加入dropout层*
 
 在加入BN层的基础上，同样基于pytorch框架实现并加入dropout层。由于不含待训练参数，只需实现其前向传播方法即可
 
