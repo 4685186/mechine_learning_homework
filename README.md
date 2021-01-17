@@ -8,9 +8,6 @@
 
 首先尝试实现最简单的LeNet5网络结构。因为是初次尝试，尽可能避免调整模型的结构，这里仅仅修改了最后一个全连接层的结构。相应地，为了匹配LeNet5的输入格式，在预处理中不得不将输入图像的分辨率降低为32×32。
 
-![图片](https://uploader.shimo.im/f/ZBBAtUSdXZm4P7U8.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-![图片](https://uploader.shimo.im/f/ITjuejeSIPATi8oE.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
 
 2. 参数设置
 ```python
@@ -25,29 +22,6 @@ learn_rate_value = 0.001  # 学习率
 这里给出训练 epoch 总数分别取 10、30、50，三种情形下的训练结果。
 
 
-    1. **训练loss曲线**
-
-![图片](https://uploader.shimo.im/f/E3mRftEW6ahdyBre.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-![图片](https://uploader.shimo.im/f/xzfDUdBs9xkDbUJj.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-![图片](https://uploader.shimo.im/f/3oN0YVtuQdW0rnoj.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-    2. **测试集分类准确率**
-|**epoch总数**|**daisy**|**dandelion**|**rose**|**sunflower**|**tulip**|**all test set**|
-|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|
-|10|67 %|64 %|25 %|67 %|62 %|57 %|
-|30|62 %|47 %|51 %|69 %|48 %|55 %|
-|50|61 %|70 %|52 %|72 %|45 %|60 %|
-
-**分析：**
-
-在 50 次训练集遍历后，loss 曲线已基本收敛，但在测试集上的准确律并没有明显的提升。
-
-可能的原因如下：
-
-* 学习率过大，loss值还有进一步降低的空间
-* 模型过于简单，层数深度不够
 
 4. 进一步实验
 
@@ -55,17 +29,6 @@ learn_rate_value = 0.001  # 学习率
 
 得到如下结果：
 
-    1. **训练loss曲线**
-
-![图片](https://uploader.shimo.im/f/gzwGIeUkDTZr6Gpb.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-    2. **测试集分类准确率**
-|**epoch 总数**|**daisy**|**dandelion**|**rose**|**sunflower**|**tulip**|**all test set**|
-|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|
-|10|67 %|64 %|25 %|67 %|62 %|57 %|
-|30|62 %|47 %|51 %|69 %|48 %|55 %|
-|50|61 %|70 %|52 %|72 %|45 %|60 %|
-|200|50 %|55 %|48 %|72 %|45 %|54 %|
 
 
 **分析：**
@@ -88,11 +51,6 @@ learn_rate_value = 0.001  # 学习率
 
 为了提高模型的可输入图片大小，同时提高模型的深度，参照AlexNet的结构进行了类似实现。为了满足题目的要求，模型在AlexNet的基础上进行了简化，去除了分类模块的两个dropout层。同时，为了降低模型的训练的时间成本，只保留了四个卷积层。
 
-![图片](https://uploader.shimo.im/f/8XtXYQQzLHcqxXVb.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-![图片](https://uploader.shimo.im/f/dkhEGnNYXKDiWLbW.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-![图片](https://uploader.shimo.im/f/kmhuCnQHhnq5qouY.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-
 2. 参数设置
 ```python
 sample_size = 40
@@ -104,24 +62,7 @@ learn_rate_value = 0.002
 
 这里给出训练 epoch 总数分别取 2、10、30、50，三种情形下的训练结果。
 
-    1. **训练 loss 曲线**
-
-![图片](https://uploader.shimo.im/f/vWJjVod89EGEuF0v.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-![图片](https://uploader.shimo.im/f/Vs4A3E1u2oXeeioa.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-![图片](https://uploader.shimo.im/f/sjQqqGK9q0YGw0nh.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-![图片](https://uploader.shimo.im/f/3kda4D1hpuxd4VND.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-    2. **测试集分类准确率**
-|**epoch总数**|**daisy**|**dandelion**|**rose**|**sunflower**|**tulip**|**all test set**|
-|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|
-|2|50 %|47 %|11 %|65 %|81 %|51 %|
-|10|76 %|81 %|57 %|86 %|65 %|73 %|
-|30|77 %|78 %|70 %|75 %|67 %|74 %|
-|50|74 %|82 %|65 %|81 %|65 %|74 %|
-
+  
 **分析：**
 
 从训练loss曲线来看，30epoch时，模型已近似收敛，直到50epoch时，loss值也没有进一步下降，可知模型收敛所需的迭代次数约为30000。
@@ -160,46 +101,6 @@ self.beta = nn.Parameter(torch.zeros(shape), requires_grad=True)
   )
 ```
 **在加入BN层的基础上，重新训练模型，同时对比未加入BN层的情形，其结果如下**
-
-（考虑了batchsize的影响）
-
-|**epoch总数**|**测试集分类准确率**|    |    |    |
-|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|
-|    |**无BN batchsize=4**|**无BN batchsize=40**|**加入BN batchsize=4**|**加入BN batchsize=40**|
-|2|51 %|22 %|61 %|62 %|
-|10|73 %|61 %|76 %|72 %|
-|50|74 %|尚未测试|尚未测试|80 %|
-
-（50epoch时，由于单次训练时间接近2小时，只给出了两种情形下的结果）
-
-**训练loss曲线对比**
-
-![图片](https://uploader.shimo.im/f/vir44kfNdWvXXa7M.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-**（无BN层 batchsize=4）**
-
-
-![图片](https://uploader.shimo.im/f/thvsyff2eq30c2AT.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-**（无BN层 batchsize=40）**
-
-
-![图片](https://uploader.shimo.im/f/Q8WAnf9gVVHoAaBP.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-**（加入BN层 batchsize=4）**
-
-![图片](https://uploader.shimo.im/f/pfvReLrAX1fuWcB0.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-**（加入BN层 batchsize=40）**
-
-
-![图片](https://uploader.shimo.im/f/3kda4D1hpuxd4VND.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-**（无BN层 batchsize=4）**
-
-![图片](https://uploader.shimo.im/f/5fsxghiKkSQFKHi5.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-**（加入BN层 batchsize=40）**
 
 
 **分析：**
@@ -240,13 +141,6 @@ class mDropOut1d(nn.Module):
     (6): Linear(in_features=2048, out_features=5, bias=True)
   )
 ```
-|**epoch总数**|**测试集分类准确率 (batchsize=40 含BN层)**|    |    |    |
-|:----:|:----|:----:|:----|:----|:----:|:----|:----|
-|    |**无dropout**|    |**加入dropout**|    |
-|10|72 %|    |72 %|    |
-|50|80 %|    |    |    |
-
-
 
     3. BN层与dropout层的pytorch实现补充
 
@@ -374,16 +268,7 @@ learn_rate_value = 0.001
 ```
 实际训练中，由于无法使用GPU进行加速，对数据集的一次遍历就需要15-20min，实验中首先尝试了两轮遍历。
 3. 训练结果
-### 
-    1. **训练loss曲线**
-
-![图片](https://uploader.shimo.im/f/KewHVoYdpatSfPzF.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-    2. **测试集分类准确率**
-|**epoch 总数**|**daisy**|**dandelion**|**rose**|**sunflower**|**tulip**|**all test set**|
-|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|
-|2|76 %|90 %|81 %|76 %|82 %|83 %|
-
+ 
 **分析**
 
 从训练loss曲线来看，2次epoch还不足以使模型收敛。但从测试集准确率来看，由于采用了含预置权重的vgg16网络，模型的预测表现有了显著的提升。一方面，这是由于vgg16这一经过特殊设计的深层网络结构自身的良好特性。另一方面，由于实验中的花卉数据集规模较小，而训练时采用迁移学习的方式，保留了在其他大数据集中训练得到的特征提取层权重，使得模型一开始就具备较强的提取图像特征的能力。
@@ -392,14 +277,6 @@ learn_rate_value = 0.001
 
 由于此前实验中的loss函数并未收敛，后续又尝试花费更多的时间进行训练，结果如下：
 
-    1. **训练loss曲线**
-
-![图片](https://uploader.shimo.im/f/GnyrrYzDQWCrN5pq.png!thumbnail?fileGuid=XXQjqrpJ6tDXywYR)
-
-    2. **测试集分类准确率**
-|**epoch总数**|**daisy**|**dandelion**|**rose**|**sunflower**|**tulip**|**all test set**|
-|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|:----:|:----|
-|4|84 %|87 %|86 %|69 %|75 %|79 %|
 
 **分析：**
 
