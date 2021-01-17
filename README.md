@@ -112,6 +112,7 @@ self.beta = nn.Parameter(torch.zeros(shape), requires_grad=True)
     * 加入BN层通常有利于提高模型的准确率，但增加batchsize则不一定
     * 加入BN层并适当地增加batchsize，能够提高模型的分类准确率
 
+
     2. 加入dropout层
 
 在加入BN层的基础上，同样基于pytorch框架实现并加入dropout层。由于不含待训练参数，只需实现其前向传播方法即可
